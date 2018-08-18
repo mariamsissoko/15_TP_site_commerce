@@ -8,6 +8,10 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
@@ -17,15 +21,25 @@ import com.intiformation.metier.Role;
 import com.intiformation.metier.User;
 
 @PersistenceContext
+@Repository //declare un bean du dao dans le conteneur spring
 public class BoutiqueDaoImpl implements IBoutiqueDao {
 	
 	// Recup de l'entity Manager
-	EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
+	@Autowired 
+	private EntityManager em;
 	
+	
+	/**
+	 * setter pour l'injection de spring
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+	@Transactional
 	@Override
 	public Long ajouterCategorie(Categorie c) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
         
         EntityTransaction tx = em.getTransaction();
         
@@ -40,10 +54,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
         return c.getIdCategorie();
 	}
 
+	@Transactional
 	@Override
 	public Categorie getCategorie(Long idCat) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
 	    
         //déf d'une requete JPQL
         String requeteJPQL = "SELECT c FROM Categorie c WHERE c." + idCat + "=?1";
@@ -59,13 +72,13 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
         em.close();
         
         return c;
+        
 	}
 
+	@Transactional
 	@Override
 	public void supprimerCategorie(Long idcat) {
 		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
-        
         EntityTransaction tx = em.getTransaction();
         
         tx.begin();
@@ -78,10 +91,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 	}
 
+	@Transactional
 	@Override
 	public void modifierCategorie(Categorie c) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
 	            
 	    EntityTransaction tx = em.getTransaction();
 	            
@@ -94,11 +106,10 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 	    em.close();
 		
 	}
-
+	
+	@Transactional
 	@Override
 	public Long ajouterProduit(Produit p, Long idCat) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
 		
 		EntityTransaction tx = em.getTransaction();
         
@@ -114,10 +125,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
         return p.getIdProduit();
 	}
 
+	@Transactional
 	@Override
 	public Produit getProduit(Long idP) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
 	    
         //déf d'une requete JPQL
         String requeteJPQL = "SELECT p FROM Produit p WHERE p." + idP + "=?1";
@@ -135,10 +145,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
         return p;
 	}
 
+	@Transactional
 	@Override
 	public void supprimerProduit(Long idP) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
         
         EntityTransaction tx = em.getTransaction();
         
@@ -152,10 +161,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 	}
 
+	@Transactional
 	@Override
 	public void modifierProduit(Produit p) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
         
 	    EntityTransaction tx = em.getTransaction();
 	            
@@ -169,10 +177,9 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 	}
 
+	@Transactional
 	@Override
 	public void ajouterUser(User u) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
 		
 		EntityTransaction tx = em.getTransaction();
         
@@ -187,21 +194,27 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 	}
 
+	@Transactional
 	@Override
 	public List<Categorie> listCategories() {
+		
 		List<Categorie> listCat = em.createQuery("SELECT c FROM Categorie c").getResultList();
 		em.close();
 		return listCat;
 		
 	}
 
+	@Transactional
 	@Override
 	public List<Produit> listproduits() {
+		
 		List<Produit> listProd = em.createQuery("SELECT p FROM Produit p").getResultList();
 		em.close();
 		return listProd;
+		
 	}
 
+	@Transactional
 	@Override
 	public List<Produit> produitsParMotCle(String mc) {
 
@@ -219,8 +232,10 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		em.close();
 		
 		return listProdMC;
+		
 	}
 
+	@Transactional
 	@Override
 	public List<Produit> produitsParCategorie(Long idCat) {
 		
@@ -239,21 +254,27 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		em.close();
 		
 		return listProdidCat;
+		
 	}
 
+	@Transactional
 	@Override
 	public List<Produit> produitsSelectionnes() {
+		
 		List<Produit> listProdSelect = em.createQuery("SELECT p FROM Produit p WHERE p.\" + idP + \"=?1\"").getResultList();
 		em.close();
 		return listProdSelect ;
+		
 	}
 
+	@Transactional
 	@Override
 	public void attribuerRole(Role r, Long userID) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Transactional
 	@Override
 	public Commande enregistrerCommande(Pannier p, Client c) {
 		// TODO Auto-generated method stub
