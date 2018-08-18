@@ -18,7 +18,7 @@ public interface IBoutiqueDao {
 	
 	public Categorie getCategorie(Long idCat);
 	
-	public void supprimerCategrorie(Long idcat);
+	public void supprimerCategorie(Long idcat);
 	
 	public void modifierCategorie(Categorie c);
 	
