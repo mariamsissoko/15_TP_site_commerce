@@ -1,5 +1,5 @@
 package com.intiformation.metier;
 
-public class Pannier {
+public class Panier {
 
 }

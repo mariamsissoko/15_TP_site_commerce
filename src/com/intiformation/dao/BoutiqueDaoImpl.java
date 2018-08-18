@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
-import com.intiformation.metier.Pannier;
+import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
 import com.intiformation.metier.Role;
 import com.intiformation.metier.User;
@@ -276,7 +275,7 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 
 	@Transactional
 	@Override
-	public Commande enregistrerCommande(Pannier p, Client c) {
+	public Commande enregistrerCommande(Panier p, Client c) {
 		// TODO Auto-generated method stub
 		return null;
 	}

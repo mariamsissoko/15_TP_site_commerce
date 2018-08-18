@@ -1,11 +1,9 @@
 package com.intiformation.service;
 
-import java.util.List;
-
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
-import com.intiformation.metier.Pannier;
+import com.intiformation.metier.Panier;
 import com.intiformation.metier.Role;
 
 public interface IAdminCategoriesMetier {
@@ -18,6 +16,6 @@ public interface IAdminCategoriesMetier {
 	
 	public void attribuerRoleServ(Role r, Long userID);
 	
-	public Commande enregistrerCommandeServ(Pannier p, Client c);
+	public Commande enregistrerCommandeServ(Panier p, Client c);
 	
 }
