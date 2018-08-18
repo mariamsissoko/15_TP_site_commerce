@@ -2,6 +2,8 @@ package com.intiformation.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import com.intiformation.metier.Categorie;
@@ -14,7 +16,12 @@ import com.intiformation.metier.User;
 
 @PersistenceContext
 public class BoutiqueDaoImpl implements IBoutiqueDao {
-
+	
+	// Recup de l'entity Manager
+	EntityManager em = Persistence.createEntityManagerFactory("").createEntityManager();
+	
+	
+ 
 	@Override
 	public Long ajouterCategorie(Categorie c) {
 		// TODO Auto-generated method stub
@@ -23,8 +30,10 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 
 	@Override
 	public List<Categorie> listCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Categorie> listCat = em.createQuery("SELECT c FROM Categorie c").getResultList();
+		em.close();
+		return listCat;
+		
 	}
 
 	@Override
@@ -53,26 +62,30 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 
 	@Override
 	public List<Produit> listproduits() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> listProd = em.createQuery("SELECT p FROM Produit p").getResultList();
+		em.close();
+		return listProd;
 	}
 
 	@Override
 	public List<Produit> produitsParMotCle(String mc) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> listProdMC = em.createQuery("SELECT FROM  WHERE").getResultList();
+		em.close();
+		return listProdMC;
 	}
 
 	@Override
 	public List<Produit> produitsParCategorie(Long idCat) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> listProdidCat = em.createQuery("SELECT FROM  WHERE").getResultList();
+		em.close();
+		return listProdidCat;
 	}
 
 	@Override
 	public List<Produit> produitsSelectionnes() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> listProdSelect = em.createQuery("SELECT FROM  WHERE").getResultList();
+		em.close();
+		return listProdSelect ;
 	}
 
 	@Override
