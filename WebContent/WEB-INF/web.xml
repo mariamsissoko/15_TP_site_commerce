@@ -50,7 +50,7 @@
 						/WEB-INF/applicationContext-datasource.xml 
 						/WEB-INF/applicationContext-hibernate.xml 
 						/WEB-INF/eboutique-servlet.xml 
-						<!--  /WEB-INF/applicationContext-security.xml -->
+						/WEB-INF/applicationContext-security.xml -->
 			</param-value>
 		</context-param>
 

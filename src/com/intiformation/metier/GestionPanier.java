@@ -31,6 +31,8 @@ public class GestionPanier {
 	
 	public static void addProduct(Commande c, Produit p, int prix, int quantite) {
 		
+		p.setSelectionne(true);
+		
 		ligneCommande com = new ligneCommande(p, c, quantite, prix);
 		
 		pan.getPanier().add(com);

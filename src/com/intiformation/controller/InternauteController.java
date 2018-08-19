@@ -15,7 +15,6 @@ import com.intiformation.metier.Commande;
 import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
-import com.intiformation.service.BoutiqueMetierImpl;
 import com.intiformation.service.InternauteBoutique;
 
 
@@ -40,7 +39,7 @@ public class InternauteController {
 	 */
 	@RequestMapping(value="/eboutique/liste", method=RequestMethod.GET)
 	public String listerProduits(ModelMap modele) {
-		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
+		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
 		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
 		
 		//données a retourner vers la vue
@@ -60,13 +59,11 @@ public class InternauteController {
 		return "eboutique";
 		
 	}
-	
-	
 
 	@RequestMapping(value="/eboutique/listeCat", method=RequestMethod.GET)
 	public String listerProduitsCat(@PathVariable("idCat") Long pIdCat,
 			ModelMap modele) {
-		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
+		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
 		List<Produit> listeProd = fonctionnaireManager.produitsParCategorieServ(pIdCat);
 		
 		//données a retourner vers la vue
@@ -111,13 +108,13 @@ public class InternauteController {
 	
 	}
 	
-	@RequestMapping(value="/eboutique/addPanier?idProduit={idProd}&quantite={quantite}", method=RequestMethod.GET)
+	@RequestMapping(value="/eboutique/ajouterAuPanier?idProduit={idProd}&quantite={quantite}", method=RequestMethod.GET)
 	public String ajouterPanier(@PathVariable("idProd") Long pIdProd, @PathVariable("quantite") int pQuantite,
 			@RequestParam("commande") Commande pComm,
 			@RequestParam("prix") int prix,
 			ModelMap modele) {
 		
-		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
+		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
 		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
 		
 	    //données a retourner vers la vue
@@ -143,11 +140,11 @@ public class InternauteController {
 	}
 
 	/*
-	@RequestMapping(value="/eboutique/addPanier/{idProd}", method=RequestMethod.GET)
+	@RequestMapping(value="/eboutique/suprimerDuPanier/{idProd}", method=RequestMethod.GET)
 	public String supprimerPanier(@PathVariable("idProd") int pIdProd, @PathVariable("quantite") int pQuantite,
 			ModelMap modele) {
 		
-		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
+		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
 	    List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
 				
 	    //données a retourner vers la vue

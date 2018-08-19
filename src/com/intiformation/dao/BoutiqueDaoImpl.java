@@ -266,14 +266,10 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 	@Override
 	public List<Produit> produitsSelectionnes() {
 		
-		//Fonctionnalité permettant de consulter les produit sélectionnées non implémentée
-		
-		/*
-		List<Produit> listProdSelect = em.createQuery("").getResultList();
+		List<Produit> listProdSelect = em.createQuery("SELECT p FROM Produit p WHERE p.selectionne=true").getResultList();
 		em.close();
 		return listProdSelect ;
-		*/
-		return null;
+		
 	}
 
 	@Transactional
