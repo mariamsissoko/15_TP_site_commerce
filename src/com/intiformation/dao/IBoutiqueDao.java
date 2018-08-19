@@ -5,6 +5,7 @@ import java.util.List;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
+import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
 import com.intiformation.metier.Role;
@@ -42,6 +43,5 @@ public interface IBoutiqueDao {
 	
 	public void attribuerRole(Role r, Long userID);
 	
-	public Commande enregistrerCommande(Panier p, Client c);
-
+	public Commande enregistrerCommande(GestionPanier p, Client c);
 }

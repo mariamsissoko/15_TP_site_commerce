@@ -31,51 +31,51 @@ public class Client implements Serializable{
 	@Column(name="telephone")
 	private String telephone;
 	
-	@OneToMany(mappedBy = "client", targetEntity = Produit.class, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", targetEntity = Commande.class, cascade = CascadeType.ALL)
 	private List<Commande> commandes;
 	
-	
-
 	/**
 	 * ctor vide
 	 */
 	public Client() {
 		super();
 	}
-
-	/**
-	 * ctor chargé sans l'id
-	 * @param nomClient
-	 * @param adresse
-	 * @param email
-	 * @param telephone
-	 */
-	public Client(String nomClient, String adresse, String email, String telephone) {
-		super();
-		this.nomClient = nomClient;
-		this.adresse = adresse;
-		this.email = email;
-		this.telephone = telephone;
-	}
-
 	
 	/**
-	 * ctor chargé avec l'id
 	 * @param idClient
 	 * @param nomClient
 	 * @param adresse
 	 * @param email
 	 * @param telephone
+	 * @param commandes
 	 */
-	public Client(Long idClient, String nomClient, String adresse, String email, String telephone) {
+	public Client(Long idClient, String nomClient, String adresse, String email, String telephone,
+			List<Commande> commandes) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.telephone = telephone;
+		this.commandes = commandes;
 	}
 	
+	/**
+	 * @param nomClient
+	 * @param adresse
+	 * @param email
+	 * @param telephone
+	 * @param commandes
+	 */
+	public Client(String nomClient, String adresse, String email, String telephone, List<Commande> commandes) {
+		super();
+		this.nomClient = nomClient;
+		this.adresse = adresse;
+		this.email = email;
+		this.telephone = telephone;
+		this.commandes = commandes;
+	}
+
 	//Getters|Setters
 
 	/**

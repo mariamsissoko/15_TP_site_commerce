@@ -16,10 +16,10 @@
 	<!-- ================================================================================================== -->
 	<bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		
-		<property name="driverClassName" value="${jdbc.diverClassName}"/>
-		<property name="url" value="${jdbc.url}"/>
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
+		<property name="driverClassName" value="${javax.persistence.jdbc.diverClassName}"/>
+		<property name="url" value="${javax.persistence.jdbc.url}"/>
+		<property name="username" value="${javax.persistence.jdbc.username}"/>
+		<property name="password" value="${javax.persistence.jdbc.password}"/>
 		
 	</bean>
 	

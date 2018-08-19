@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -28,9 +29,9 @@ public class User implements Serializable {
 	@Column(name="actived")
 	private boolean actived;
 	
-	
-	@OneToMany(mappedBy = "user", targetEntity = Role.class, cascade = CascadeType.ALL)
-	private List<Role> roles;
+	@OneToMany
+	@JoinColumn(name = "role_id", referencedColumnName="idRole")
+	private Role role;
 	
 	/**
 	 * ctor vide
@@ -40,35 +41,52 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * ctor chargé sans l'id
-	 * @param userName
-	 * @param password
-	 * @param actived
-	 */
-	public User(String userName, String password, boolean actived) {
-		super();
-		this.userName = userName;
-		this.password = password;
-		this.actived = actived;
-	}
-	
-	/**
-	 * ctor chargé avec l'id
+	 * 
 	 * @param idUser
 	 * @param userName
 	 * @param password
 	 * @param actived
+	 * @param role
 	 */
-
-	public User(Long idUser, String userName, String password, boolean actived) {
+	public User(Long idUser, String userName, String password, boolean actived, Role role) {
 		super();
 		this.idUser = idUser;
 		this.userName = userName;
 		this.password = password;
 		this.actived = actived;
+		this.role = role;
 	}
-	
+
+
+	/**
+	 * @param userName
+	 * @param password
+	 * @param actived
+	 * @param role
+	 */
+	public User(String userName, String password, boolean actived, Role role) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.actived = actived;
+		this.role = role;
+	}
+
 	//Getters|Setters
+
+	/**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	/**
 	 * @return the idUser
@@ -129,7 +147,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", userName=" + userName + ", password=" + password + ", actived=" + actived
-				+ ", roles=" + roles + "]";
+				+ ", roles=" + role + "]";
 	}
 	
 	

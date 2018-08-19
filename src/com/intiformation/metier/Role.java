@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,36 +23,11 @@ public class Role implements Serializable{
 	@Column(name="roleName")
 	private String roleName;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "idUser" )
-	private User user;
-	
 	/**
 	 * ctor vide
 	 */
 	public Role() {
 		super();
-	}
-
-	/**
-	 * chargé sans l'id
-	 * @param roleName
-	 */
-	public Role(String roleName) {
-		super();
-		this.roleName = roleName;
-	}
-
-
-	/**
-	 * ctor chargé avec l'id
-	 * @param idRole
-	 * @param roleName
-	 */
-	public Role(Long idRole, String roleName) {
-		super();
-		this.idRole = idRole;
-		this.roleName = roleName;
 	}
 
 	//Getters|Setters
@@ -88,12 +62,5 @@ public class Role implements Serializable{
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-
-	@Override
-	public String toString() {
-		return "Role [idRole=" + idRole + ", roleName=" + roleName + ", user=" + user + "]";
-	}
 	
-	
-
 }

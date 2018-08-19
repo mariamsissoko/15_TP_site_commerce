@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.intiformation.dao.BoutiqueDaoImpl;
 import com.intiformation.dao.IBoutiqueDao;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
@@ -21,9 +22,8 @@ public class BoutiqueMetierImpl implements InternauteBoutique, IAdminCategoriesM
 	//declaration de la couche DAO
 	@Autowired //injection par type du dao (equiv property name value etc ..)
 	private IBoutiqueDao dao;
-	
+
 	/**
-	 * setter pour l'injection du DAO avec spring
 	 * @param dao the dao to set
 	 */
 	public void setDao(IBoutiqueDao dao) {

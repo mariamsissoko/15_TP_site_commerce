@@ -33,7 +33,6 @@ public class Categorie implements Serializable{
 	// one session To Many Module
     
     @OneToMany(mappedBy = "categorie", targetEntity = Produit.class, cascade = CascadeType.ALL)
-	
     private List<Produit> listProduit;
 
 	/**
@@ -43,35 +42,37 @@ public class Categorie implements Serializable{
 	
 	}
 
-	/**
-	 * ctor chargé sans l'id
-	 * @param nomCategorie
-	 * @param photo
-	 * @param description
-	 */
-	public Categorie(String nomCategorie, byte[] photo, String description) {
-		super();
-		this.nomCategorie = nomCategorie;
-		this.photo = photo;
-		this.description = description;
-	}
-
-	/**
-	 * ctor chargé avec l'id
-	 * @param idCategorie
-	 * @param nomCategorie
-	 * @param photo
-	 * @param description
-	 */
-	public Categorie(Long idCategorie, String nomCategorie, byte[] photo, String description) {
+    /***
+     * @param idCategorie
+     * @param nomCategorie
+     * @param photo
+     * @param description
+     * @param listProduit
+     */
+	public Categorie(Long idCategorie, String nomCategorie, byte[] photo, String description,
+			List<Produit> listProduit) {
 		super();
 		this.idCategorie = idCategorie;
 		this.nomCategorie = nomCategorie;
 		this.photo = photo;
 		this.description = description;
+		this.listProduit = listProduit;
 	}
-	
-	
+
+	/**
+	 * @param nomCategorie
+	 * @param photo
+	 * @param description
+	 * @param listProduit
+	 */
+	public Categorie(String nomCategorie, byte[] photo, String description, List<Produit> listProduit) {
+		super();
+		this.nomCategorie = nomCategorie;
+		this.photo = photo;
+		this.description = description;
+		this.listProduit = listProduit;
+	}
+
 	//Getters|Setters
 
 	/**
@@ -137,7 +138,6 @@ public class Categorie implements Serializable{
 	public void setListProduit(List<Produit> listProduit) {
 		this.listProduit = listProduit;
 	}
-	
 	
 	@Override
 	public String toString() {

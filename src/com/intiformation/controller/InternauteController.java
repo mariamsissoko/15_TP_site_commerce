@@ -8,11 +8,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intiformation.metier.Categorie;
+import com.intiformation.metier.Commande;
 import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
+import com.intiformation.service.BoutiqueMetierImpl;
 import com.intiformation.service.InternauteBoutique;
 
 
@@ -21,17 +24,15 @@ public class InternauteController {
 
 	//declaration du service
 	@Autowired
-	private InternauteBoutique fonctionnaireManager;
-
+	private BoutiqueMetierImpl fonctionnaireManager;
+	
 	/**
-	 * setter pour injection spring
-	 * @param fonctionnaireService
+	 * @param fonctionnaireManager the fonctionnaireManager to set
 	 */
-
-	public void setFonctionnaireService(InternauteBoutique fonctionnaireManager) {
+	public void setFonctionnaireManager(BoutiqueMetierImpl fonctionnaireManager) {
 		this.fonctionnaireManager = fonctionnaireManager;
 	}
-	
+
 	/**
 	 * 
 	 * @param modele : modele de données a retrouner vers la vue. 
@@ -109,16 +110,20 @@ public class InternauteController {
 	}
 	
 	@RequestMapping(value="/eboutique/addPanier?idProduit={idProd}&quantite={quantite}", method=RequestMethod.GET)
-	public String ajouterPanier(@PathVariable("idProd") int pIdProd, @PathVariable("quantite") int pQuantite,
+	public String ajouterPanier(@PathVariable("idProd") Long pIdProd, @PathVariable("quantite") int pQuantite,
+			@RequestParam("commande") Commande pComm,
+			@RequestParam("prix") int prix,
 			ModelMap modele) {
 		
 		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
 		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
-				
+		
 	    //données a retourner vers la vue
 		modele.addAttribute("produits", listeProd);
 				
-		GestionPanier.addProduct(pIdProd, pQuantite);
+		Produit prod= fonctionnaireManager.getProduitServ(pIdProd);
+				
+		GestionPanier.addProduct(pComm, prod, prix, pQuantite);
 		
 		Panier n = GestionPanier.getPan();
 		
@@ -135,7 +140,7 @@ public class InternauteController {
 	
 	}
 
-	
+	/*
 	@RequestMapping(value="/eboutique/addPanier/{idProd}", method=RequestMethod.GET)
 	public String supprimerPanier(@PathVariable("idProd") int pIdProd, @PathVariable("quantite") int pQuantite,
 			ModelMap modele) {
@@ -162,7 +167,5 @@ public class InternauteController {
 		return "eboutique";
 	
 	}
-	
-	
-	
+	*/
 }

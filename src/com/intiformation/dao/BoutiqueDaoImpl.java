@@ -3,6 +3,7 @@ package com.intiformation.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
+import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
 import com.intiformation.metier.Role;
@@ -25,15 +27,16 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 	
 	// Recup de l'entity Manager
 	@Autowired 
-	private EntityManager em;
-	
+	private EntityManagerFactory emf;
+			
+	private EntityManager em= emf.createEntityManager();
 	
 	/**
 	 * setter pour l'injection de spring
-	 * @param em the em to set
+	 * @param emf the emf to set
 	 */
-	public void setEm(EntityManager em) {
-		this.em = em;
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 
 	@Transactional
@@ -53,12 +56,14 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
         return c.getIdCategorie();
 	}
 
+
+
 	@Transactional
 	@Override
 	public Categorie getCategorie(Long idCat) {
 	    
         //déf d'une requete JPQL
-        String requeteJPQL = "SELECT c FROM Categorie c WHERE c." + idCat + "=?1";
+        String requeteJPQL = "SELECT c FROM Categorie c WHERE c.idCategorie=?1";
 
         //creation de la requete avec JPA 
         Query selectQuery = em.createQuery(requeteJPQL);
@@ -129,7 +134,7 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 	public Produit getProduit(Long idP) {
 	    
         //déf d'une requete JPQL
-        String requeteJPQL = "SELECT p FROM Produit p WHERE p." + idP + "=?1";
+        String requeteJPQL = "SELECT p FROM Produit p WHERE p.idProduit=?1";
 
         //creation de la requete avec JPA 
         Query selectQuery = em.createQuery(requeteJPQL);
@@ -240,7 +245,7 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 		//déf d'une requete JPQL
 		//A changer
-        String requeteJPQL = "SELECT p FROM Produit p WHERE p.idcat=?1";
+        String requeteJPQL = "SELECT p FROM Produit p WHERE p.idCategorie=?1";
 
         //creation de la requete avec JPA 
         Query selectQuery = em.createQuery(requeteJPQL);
@@ -256,27 +261,54 @@ public class BoutiqueDaoImpl implements IBoutiqueDao {
 		
 	}
 
+	
 	@Transactional
 	@Override
 	public List<Produit> produitsSelectionnes() {
 		
-		List<Produit> listProdSelect = em.createQuery("SELECT p FROM Produit p WHERE p.\" + idP + \"=?1\"").getResultList();
+		//Fonctionnalité permettant de consulter les produit sélectionnées non implémentée
+		
+		/*
+		List<Produit> listProdSelect = em.createQuery("").getResultList();
 		em.close();
 		return listProdSelect ;
-		
+		*/
+		return null;
 	}
 
 	@Transactional
 	@Override
 	public void attribuerRole(Role r, Long userID) {
-		// TODO Auto-generated method stub
+		
+		//déf d'une requete JPQL
+        String requeteJPQL = "SELECT u FROM User u WHERE u.idUser=?1";
+
+        //creation de la requete avec JPA 
+        Query selectQuery = em.createQuery(requeteJPQL);
+
+        selectQuery.setParameter(1, userID);
+        
+        //execution de la requête 
+        User u = (User) selectQuery.getSingleResult();
+
+        u.setRole(r);
+        
+        EntityTransaction tx = em.getTransaction();
+        
+	    tx.begin();
+	        
+	    em.merge(u);
+	      
+	    tx.commit();
+	    
+        em.close();		
 		
 	}
 
 	@Transactional
 	@Override
-	public Commande enregistrerCommande(Panier p, Client c) {
-		// TODO Auto-generated method stub
+	public Commande enregistrerCommande(GestionPanier p, Client c) {
+		
 		return null;
 	}
 

@@ -1,5 +1,7 @@
 package com.intiformation.metier;
 
+import javax.persistence.EntityTransaction;
+
 public class GestionPanier {
 
 	public static Panier pan;
@@ -27,11 +29,17 @@ public class GestionPanier {
 		this.pan = pan;
 	}
 	
-	public static void addProduct(int idProd, int quantite) {
+	public static void addProduct(Commande c, Produit p, int prix, int quantite) {
+		
+		ligneCommande com = new ligneCommande(p, c, quantite, prix);
+		
+		pan.getPanier().add(com);
 		
 	}
 	
-	public static void deleteProduct(int idProd) {
+	public static void deleteProduct() {
+		
+		pan.getPanier().clear();
 		
 	}
 	

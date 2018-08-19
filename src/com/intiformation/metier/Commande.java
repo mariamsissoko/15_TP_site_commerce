@@ -31,11 +31,9 @@ public class Commande implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id", referencedColumnName = "idClient" )
 	private Client client;
-	
-	
+
 	@OneToMany(mappedBy = "Commande", targetEntity = ligneCommande.class, cascade = CascadeType.ALL)
 	private List<ligneCommande> ligneCommandes;
-	
 	
 	/**
 	 * ctor vide
@@ -45,24 +43,29 @@ public class Commande implements Serializable {
 	}
 
 	/**
-	 * ctor chargé sans l'id
-	 * @param dateCommande
-	 */
-	public Commande(Date dateCommande) {
-		super();
-		this.dateCommande = dateCommande;
-	}
-
-	
-	/**
-	 * ctor chargé avec l'id
 	 * @param idCommande
 	 * @param dateCommande
+	 * @param client
+	 * @param ligneCommandes
 	 */
-	public Commande(Long idCommande, Date dateCommande) {
+	public Commande(Long idCommande, Date dateCommande, Client client, List<ligneCommande> ligneCommandes) {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
+		this.client = client;
+		this.ligneCommandes = ligneCommandes;
+	}
+
+	/**
+	 * @param dateCommande
+	 * @param client
+	 * @param ligneCommandes
+	 */
+	public Commande(Date dateCommande, Client client, List<ligneCommande> ligneCommandes) {
+		super();
+		this.dateCommande = dateCommande;
+		this.client = client;
+		this.ligneCommandes = ligneCommandes;
 	}
 
 	/**
