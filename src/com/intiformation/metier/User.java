@@ -1,10 +1,36 @@
 package com.intiformation.metier;
 
-public class User {
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class User implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idUser")
 	private Long idUser;
+	
+	@Column(name="userName")
 	private String userName;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="actived")
 	private boolean actived;
+	
+	
+	@OneToMany(mappedBy = "user", targetEntity = Role.class, cascade = CascadeType.ALL)
+	private List<Role> roles;
 	
 	/**
 	 * ctor vide
@@ -98,6 +124,12 @@ public class User {
 	 */
 	public void setActived(boolean actived) {
 		this.actived = actived;
+	}
+
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", userName=" + userName + ", password=" + password + ", actived=" + actived
+				+ ", roles=" + roles + "]";
 	}
 	
 	

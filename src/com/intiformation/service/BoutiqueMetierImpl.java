@@ -32,92 +32,82 @@ public class BoutiqueMetierImpl implements InternauteBoutique, IAdminCategoriesM
 
 	@Override
 	public Long ajouterProduitServ(Produit p, Long idCat) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.ajouterProduit(p, idCat);
 	}
 
 	@Override
 	public void supprimerProduitServ(Long idP) {
-		// TODO Auto-generated method stub
+		dao.supprimerProduit(idP);
 		
 	}
 
 	@Override
 	public void modifierProduitServ(Produit p) {
-		// TODO Auto-generated method stub
+		dao.modifierProduit(p);
 		
 	}
 
 	@Override
 	public Long ajouterCategorieServ(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.ajouterCategorie(c);
 	}
 
 	@Override
 	public void supprimerCategorieServ(Long idcat) {
-		// TODO Auto-generated method stub
+		dao.supprimerCategorie(idcat);
 		
 	}
 
 	@Override
 	public void modifierCategorieServ(Categorie c) {
-		// TODO Auto-generated method stub
+		dao.modifierCategorie(c);
 		
 	}
 
 	@Override
 	public void attribuerRoleServ(Role r, Long userID) {
-		// TODO Auto-generated method stub
+		dao.attribuerRole(r, userID);
 		
 	}
 
 	@Override
 	public List<Categorie> listCategoriesServ() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.listCategories();
 	}
 
 	@Override
 	public Categorie getCategorieServ(Long idCat) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getCategorie(idCat);
 	}
 
 	@Override
 	public List<Produit> listproduitsServ() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.listproduits();
 	}
 
 	@Override
 	public List<Produit> produitsParMotCleServ(String mc) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.produitsParMotCle(mc);
 	}
 
 	@Override
 	public List<Produit> produitsParCategorieServ(Long idCat) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.produitsParCategorie(idCat);
 	}
 
 	@Override
 	public List<Produit> produitsSelectionnesServ() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.produitsSelectionnes();
 	}
 
 	@Override
 	public Produit getProduitServ(Long idP) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getProduit(idP);
 	}
 
 	@Override
 	public Commande enregistrerCommandeServ(Panier p, Client c) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.enregistrerCommande(p, c);
 	}
 
 }

@@ -1,16 +1,46 @@
 package com.intiformation.metier;
 
-public class Categorie {
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+@Entity
+public class Categorie implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idCategorie")
 	private Long idCategorie;
+	
+	@Column(name="nomCategorie")
 	private String nomCategorie;
+	
+	@Column(name="photo")
 	private byte[] photo;
+	
+	@Column(name="description")
 	private String description;
 	
+	// one session To Many Module
+    
+    @OneToMany(mappedBy = "categorie", targetEntity = Produit.class, cascade = CascadeType.ALL)
+	
+    private List<Produit> listProduit;
+
 	/**
 	 * ctor vide 
 	 */
 	public Categorie() {
-		super();
+	
 	}
 
 	/**
@@ -100,7 +130,19 @@ public class Categorie {
 		this.description = description;
 	}
 	
+	public List<Produit> getListProduit() {
+		return listProduit;
+	}
+
+	public void setListProduit(List<Produit> listProduit) {
+		this.listProduit = listProduit;
+	}
 	
 	
+	@Override
+	public String toString() {
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo="
+				+ Arrays.toString(photo) + ", description=" + description + "]";
+	}
 
 }

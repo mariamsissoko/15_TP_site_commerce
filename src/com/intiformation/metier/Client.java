@@ -1,12 +1,41 @@
 package com.intiformation.metier;
 
-public class Client {
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Client implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idClient")
 	private Long idClient;
+	
+	@Column(name="nomClient")
 	private String nomClient;
+	
+	@Column(name="adresse")
 	private String adresse;
+	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="telephone")
 	private String telephone;
 	
+	@OneToMany(mappedBy = "client", targetEntity = Produit.class, cascade = CascadeType.ALL)
+	private List<Commande> commandes;
+	
+	
+
 	/**
 	 * ctor vide
 	 */
@@ -119,6 +148,20 @@ public class Client {
 		this.telephone = telephone;
 	}
 	
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email=" + email
+				+ ", telephone=" + telephone + ", commandes=" + commandes + "]";
+	}
 	
 
+	
 }

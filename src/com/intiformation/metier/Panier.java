@@ -1,5 +1,7 @@
 package com.intiformation.metier;
 
-public class Panier {
+import java.io.Serializable;
+
+public class Panier implements Serializable {
 
 }

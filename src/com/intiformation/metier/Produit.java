@@ -1,20 +1,50 @@
 package com.intiformation.metier;
 
-public class Produit {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Produit implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idProduit")
 	private Long idProduit;
+	
+	@Column(name="designation")
 	private String designation;
+	
+	@Column(name="description")
 	private String description;
+	
+	@Column(name="prix")
 	private double prix;
+	
+	@Column(name="quantite")
 	private int quantite;
+	
+	@Column(name="selectionne")
 	private boolean selectionne;
+	
+	@Column(name="photo")
 	private String photo;
 	
+	@ManyToOne
+	@JoinColumn(name = "categorie_id", referencedColumnName = "idCategorie" )
+	
+	private Categorie categorie;
+
 	/**
 	 * ctor vide
 	 */
 	public Produit() {
-		super();
 	}
 	
 	/**
@@ -161,9 +191,19 @@ public class Produit {
 		this.photo = photo;
 	}
 	
-	
-	
-	
-	
+	public Categorie getCategorie() {
+		return categorie;
+	}
 
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	@Override
+	public String toString() {
+		return "Produit [idProduit=" + idProduit + ", designation=" + designation + ", description=" + description
+				+ ", prix=" + prix + ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo=" + photo
+				+ "]";
+	}	
+	
 }
