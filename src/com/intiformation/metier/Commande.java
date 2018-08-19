@@ -32,7 +32,7 @@ public class Commande implements Serializable {
 	@JoinColumn(name = "client_id", referencedColumnName = "idClient" )
 	private Client client;
 
-	@OneToMany(mappedBy = "Commande", targetEntity = ligneCommande.class, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "commande", targetEntity = ligneCommande.class, cascade = CascadeType.ALL)
 	private List<ligneCommande> ligneCommandes;
 	
 	/**

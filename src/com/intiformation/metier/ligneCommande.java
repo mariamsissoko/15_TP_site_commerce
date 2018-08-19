@@ -18,7 +18,8 @@ public class ligneCommande implements Serializable {
 	@JoinColumn(name = "produit_id", referencedColumnName = "idProduit" )
 	private Produit produit;
 
-	@Id@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@JoinColumn(name = "commande_id", referencedColumnName = "idCommande" )
 	private Commande commande;
 	
