@@ -5,7 +5,7 @@ import java.util.List;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
-import com.intiformation.metier.Panier;
+import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Produit;
 
 public interface InternauteBoutique {
@@ -24,6 +24,6 @@ public interface InternauteBoutique {
 	
 	public Produit getProduitServ(Long idP);
 	
-	public Commande enregistrerCommandeServ(Panier p, Client c);
+	public Commande enregistrerCommandeServ(GestionPanier p, Client c);
 	
 }

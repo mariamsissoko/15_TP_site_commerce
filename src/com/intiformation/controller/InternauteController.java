@@ -24,12 +24,12 @@ public class InternauteController {
 
 	//declaration du service
 	@Autowired
-	private BoutiqueMetierImpl fonctionnaireManager;
+	private InternauteBoutique fonctionnaireManager;
 	
 	/**
 	 * @param fonctionnaireManager the fonctionnaireManager to set
 	 */
-	public void setFonctionnaireManager(BoutiqueMetierImpl fonctionnaireManager) {
+	public void setFonctionnaireManager(InternauteBoutique fonctionnaireManager) {
 		this.fonctionnaireManager = fonctionnaireManager;
 	}
 
@@ -38,7 +38,7 @@ public class InternauteController {
 	 * @param modele : modele de données a retrouner vers la vue. 
 	 * @return le nom logique de la vue.
 	 */
-	@RequestMapping(value="/eboutique", method=RequestMethod.GET)
+	@RequestMapping(value="/eboutique/liste", method=RequestMethod.GET)
 	public String listerProduits(ModelMap modele) {
 		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
 		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
@@ -61,7 +61,9 @@ public class InternauteController {
 		
 	}
 	
-	@RequestMapping(value="/eboutique", method=RequestMethod.GET)
+	
+
+	@RequestMapping(value="/eboutique/listeCat", method=RequestMethod.GET)
 	public String listerProduitsCat(@PathVariable("idCat") Long pIdCat,
 			ModelMap modele) {
 		//appel du serrvice pour récupérer la liste des fonctionnaire dans la bdd
@@ -85,7 +87,7 @@ public class InternauteController {
 		
 	}
 	
-	@RequestMapping(value="/eboutique", method=RequestMethod.GET)
+	@RequestMapping(value="/eboutique/listeMot", method=RequestMethod.GET)
 	public String listerProduitsMotsCles(@PathVariable("idMC") String pIdMC,
 			ModelMap modele) {
 		//appel du service pour récupérer la liste des fonctionnaire dans la bdd

@@ -11,6 +11,7 @@ import com.intiformation.dao.IBoutiqueDao;
 import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
+import com.intiformation.metier.GestionPanier;
 import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
 import com.intiformation.metier.Role;
@@ -106,7 +107,7 @@ public class BoutiqueMetierImpl implements InternauteBoutique, IAdminCategoriesM
 	}
 
 	@Override
-	public Commande enregistrerCommandeServ(Panier p, Client c) {
+	public Commande enregistrerCommandeServ(GestionPanier p, Client c) {
 		return dao.enregistrerCommande(p, c);
 	}
 

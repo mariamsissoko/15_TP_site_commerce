@@ -16,20 +16,20 @@ import com.intiformation.metier.Categorie;
 import com.intiformation.metier.Client;
 import com.intiformation.metier.Commande;
 import com.intiformation.metier.GestionPanier;
-import com.intiformation.metier.Panier;
 import com.intiformation.metier.Produit;
 import com.intiformation.metier.Role;
 import com.intiformation.metier.User;
 
-@PersistenceContext
+@PersistenceContext	
 @Repository //declare un bean du dao dans le conteneur spring
 public class BoutiqueDaoImpl implements IBoutiqueDao {
 	
 	// Recup de l'entity Manager
 	@Autowired 
 	private EntityManagerFactory emf;
-			
-	private EntityManager em= emf.createEntityManager();
+		
+	private EntityManager em;
+	//= emf.createEntityManager();
 	
 	/**
 	 * setter pour l'injection de spring

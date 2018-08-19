@@ -16,6 +16,4 @@ public interface IAdminCategoriesMetier {
 	
 	public void attribuerRoleServ(Role r, Long userID);
 	
-	public Commande enregistrerCommandeServ(Panier p, Client c);
-	
 }
