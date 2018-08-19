@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>15_TP_site_ecommerce</display-name>
-  
-    	<!-- ================================================================================================== -->
-	<!-- ===============================	CONFIGURATION DE SPRING SECURITY		======================= -->
-	<!-- ================================================================================================== -->
-  	<!-- declaration du filtre de sécurité -->
-  	<filter>
-  		<filter-name>springSecurityFilterChain</filter-name>
-  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-  	</filter>
-  	
-  	<!-- /* : toutes les requetes sont interceptées par le filtre -->
-  	<filter-mapping>
-  		<filter-name>springSecurityFilterChain</filter-name>
-  		<url-pattern>/*</url-pattern>
-  	</filter-mapping>
-  	
   	 
   
   	<!-- ================================================================================================== -->
@@ -50,7 +34,7 @@
 						/WEB-INF/applicationContext-datasource.xml 
 						/WEB-INF/applicationContext-hibernate.xml 
 						/WEB-INF/eboutique-servlet.xml 
-						/WEB-INF/applicationContext-security.xml -->
+						<!--/WEB-INF/applicationContext-security.xml-->		
 			</param-value>
 		</context-param>
 
@@ -60,7 +44,7 @@
 	<!-- ================================================================================================== -->
 	<welcome-file-list>
 
-	    <welcome-file>Accueil.jsp</welcome-file>
+	    <welcome-file>index.jsp</welcome-file>
 	  
   	</welcome-file-list>
   

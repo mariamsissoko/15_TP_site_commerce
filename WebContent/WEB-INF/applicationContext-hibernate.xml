@@ -7,7 +7,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-
 	<!-- ================================================================================================== -->
 	<!-- =======================	CONFIG ANNOTATION (detection des annotation)  	======================= -->
 	<!-- ================================================================================================== -->
@@ -47,21 +46,6 @@
 				<prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.hbm2ddl}</prop>
 			</props>
 		</property>
-		
-<!-- declaration des classe annotées  : Mapping 
-		<property name="annotatedClasses">
-			<list>
-				<value>com.intiformation.metier.Categorie</value>
-				<value>com.intiformation.metier.Client</value>
-				<value>com.intiformation.metier.Commande</value>
-				<value>com.intiformation.metier.ligneCommande</value>
-				<value>com.intiformation.metier.Panier</value>
-				<value>com.intiformation.metier.Produit</value>
-				<value>com.intiformation.metier.Role</value>
-				<value>com.intiformation.metier.User</value>
-			</list>
-		</property>
-		-->
 	</bean>
 	
 </beans>

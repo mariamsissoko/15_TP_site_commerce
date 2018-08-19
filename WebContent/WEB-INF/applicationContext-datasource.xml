@@ -22,5 +22,5 @@
 		<property name="password" value="${javax.persistence.jdbc.password}"/>
 		
 	</bean>
-	
+
 </beans>
