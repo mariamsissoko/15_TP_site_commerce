@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>15_TP_site_ecommerce</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+  
+    	<!-- ================================================================================================== -->
+	<!-- ===============================	CONFIGURATION DE SPRING SECURITY		======================= -->
+	<!-- ================================================================================================== -->
+  	<!-- declaration du filtre de sécurité -->
+  	<filter>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  	</filter>
+  	
+  	<!-- /* : toutes les requetes sont interceptées par le filtre -->
+  	<filter-mapping>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  	
+  	 
+  
+  	<!-- ================================================================================================== -->
+	<!-- ===============================	CONFIGURATION DE SPRING MVC		=============================== -->
+	<!-- ================================================================================================== -->
+	<!-- ~~~~~~~~~~~~~ 1. declaration de la servlet  -->
+  	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>gestionservlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>gestionservlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+  
+  
+  	<!-- ~~~~~~~~~~~~~  2. chargement du context de l'application web  -->
+  		<!-- declaration de l'écouteur de servlet -->
+		<listener>
+			<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		</listener>
+		
+		<!-- emplacement des fichiers de definitions de beans de spring -->	
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+						/WEB-INF/applicationContext-datasource.xml 
+						/WEB-INF/applicationContext-hibernate.xml 
+						/WEB-INF/eboutique-servlet.xml 
+						/WEB-INF/applicationContext-security.xml
+			</param-value>
+		</context-param>
+
+  	
+	<!-- ================================================================================================== -->
+	<!-- ===============================	Page de démarrage	=========================================== -->
+	<!-- ================================================================================================== -->
+	<welcome-file-list>
+
+	    <welcome-file>Accueil.jsp</welcome-file>
+	  
+  	</welcome-file-list>
+  
+  
 </web-app>
