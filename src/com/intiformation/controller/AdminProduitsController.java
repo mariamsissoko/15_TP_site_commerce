@@ -51,16 +51,16 @@ public class AdminProduitsController {
 		public String deleteProduit(@PathVariable("idProduit") Long pIdProduit, 
 										  ModelMap modele) {
 			
-			//suppression du fonctionnaire
+			//suppression du produit
 			prodManager.supprimerProduitServ(pIdProduit);
 			
-			//recup de la liste des fonctionnaire
+			//recup de la liste des produits
 			List<Produit> listeProd= internauteManager.listproduitsServ();
 			
 			//données a retourner vers la vue 
 			modele.addAttribute("listeProd", listeProd);
 			
-			//redirection avec le prefixe redirect vers fonctionnaire.jsp
+			//redirection avec le prefixe redirect vers produit.jsp
 			return "produits";		
 		}
 		
@@ -75,7 +75,7 @@ public class AdminProduitsController {
 			 */
 			Map<String, Object> data = new HashMap<>();
 			
-			//1. définition de l'objet de commande 
+			//1. définition de l'objet de commande
 			Produit produit = new Produit();
 			
 			//2. definition du nom de l'objet de commande
@@ -86,14 +86,14 @@ public class AdminProduitsController {
 			data.put(objetDeCommande, produit );
 			
 			// nom logique de la vue 
-			// 'ajouterfonctionnaire' --> WEB-INF/view/ajouterfonctionnaire.jsp
+			// 'ajouterproduit' --> WEB-INF/view/ajouterproduit.jsp
 			String viewName = "ajouterproduit";
 			
 			return new ModelAndView(viewName, data);	
 		}
 		
 		/**
-		 * ajoute le fonctionnaire dans la bdd
+		 * ajoute le produit dans la bdd
 		 * @return
 		 */
 		@RequestMapping(value="produits/add", method=RequestMethod.POST)
@@ -101,38 +101,38 @@ public class AdminProduitsController {
 				@RequestParam("idCat") Long pIdCat,
 				ModelMap modele) {
 			
-			// appel du service pour l'ajout du fonctionnaire dans la bdd
+			// appel du service pour l'ajout du produit dans la bdd
 			prodManager.ajouterProduitServ(pProduit, pIdCat);
 			
-			//recup de la liste des fonctionnaire
+			//recup de la liste des produits
 			List<Produit> listeProd= internauteManager.listproduitsServ();
 			
-			//recup de la lsite des fonctionnaire dans la bdd + renvoi des données vers fonctionnaire.jsp
+			//recup de la lsite des produits dans la bdd + renvoi des données vers produit.jsp
 			modele.addAttribute("listeProd", listeProd);
 			
-			//redirection vers fonctionnaires.jsp
+			//redirection vers produits.jsp
 			return "produits";
 		}
 		
 		/**
 		 * affiche le formulaire en reponse a une requete en GET pour la modification.
-		 * @return : URL = http.../fonctionnaire/updatefonctionnaireform?fonctid=1
+		 * @return : URL = http.../produit/updateproduitform?fonctid=1
 		 */
 		@RequestMapping(value="/produits/updateproduitform" , method=RequestMethod.GET)
 		public ModelAndView setUpFormulaireUpdate(@RequestParam("id") Long pIdProduit) {
 			
-			//1.recup du fonctionnaire de la BDD(c'est l'objet de commande)
+			//1.recup du produit de la BDD(c'est l'objet de commande)
 			Produit produit = internauteManager.getProduitServ(pIdProduit);
 			
-			//nom de la vue : updatefonctionnaire
-			// nom de l'objet de commade : fonctionnaireUpCommande --> /WEB-IINF/view/updateFonctionnaire.jsp
-			// l'objet de commande : fonctionnaire
+			//nom de la vue : updateproduit
+			// nom de l'objet de commade : produitUpCommande --> /WEB-IINF/view/updateproduit.jsp
+			// l'objet de commande : produit
 			return new ModelAndView("updateproduit", "produitUpCommand", produit);
 			
 		}
 		
 		/**
-		 * modifier un fonctionnaire dans la bdd
+		 * modifier un produit dans la bdd
 		 * @param pFonctionnaire
 		 * @param modele
 		 * @return
@@ -140,13 +140,13 @@ public class AdminProduitsController {
 		@RequestMapping(value="/produits/update", method=RequestMethod.POST)
 		public String updateProduit(@ModelAttribute("produitUpCommand") Produit pProduit, ModelMap modele) {
 		
-			//appel du service pour modifier le fonctionnaire dans la bdd
+			//appel du service pour modifier le produit dans la bdd
 			prodManager.modifierProduitServ(pProduit);
 			
-			//recup de la liste des fonctionnaire dans la bdd + renvoi des données vers fonctionnaire.jsp
+			//recup de la liste des produits dans la bdd + renvoi des données vers produit.jsp
 			modele.addAttribute("listeProd", internauteManager.listproduitsServ());
 					
-			//redirection vers fonctionnaires.jsp
+			//redirection vers produits.jsp
 			return "produits";
 		}
 		

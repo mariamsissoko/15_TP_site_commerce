@@ -22,7 +22,7 @@ public interface InternauteBoutique {
 	
 	public List<Produit> produitsSelectionnesServ();
 	
-	public Produit getProduitServ(Long idP);
+	public Produit produit(Long idP);
 	
 	public Commande enregistrerCommandeServ(GestionPanier p, Client c);
 	

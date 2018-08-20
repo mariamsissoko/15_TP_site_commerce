@@ -44,16 +44,16 @@ public class AdminCategoriesController {
 	public String deleteCategorie(@PathVariable("idCat") Long pIdCategorie, 
 									  ModelMap modele) {
 		
-		//suppression du fonctionnaire
+		//suppression de la categorie
 		catManager.supprimerCategorieServ(pIdCategorie);
 		
-		//recup de la liste des fonctionnaire
+		//recup de la liste des categories
 		List<Categorie> listeCat= internauteManager.listCategoriesServ();
 		
 		//données a retourner vers la vue 
 		modele.addAttribute("listeCat", listeCat);
 		
-		//redirection avec le prefixe redirect vers fonctionnaire.jsp
+		//redirection vers categorie.jsp
 		return "categories";		
 	}
 	
@@ -79,52 +79,52 @@ public class AdminCategoriesController {
 		data.put(objetDeCommande, categorie );
 		
 		// nom logique de la vue 
-		// 'ajouterfonctionnaire' --> WEB-INF/view/ajouterfonctionnaire.jsp
+		// 'ajoutercategorie' --> WEB-INF/view/ajoutercategorie.jsp
 		String viewName = "ajoutercategorie";
 		
 		return new ModelAndView(viewName, data);	
 	}
 	
 	/**
-	 * ajoute le fonctionnaire dans la bdd
+	 * ajoute la catégorie dans la bdd
 	 * @return
 	 */
 	@RequestMapping(value="categories/add", method=RequestMethod.POST)
 	public String addCategorie(@ModelAttribute("categorieCommand") Categorie pCategorie,
 			ModelMap modele) {
 		
-		// appel du service pour l'ajout du fonctionnaire dans la bdd
+		// appel du service pour l'ajout de la catégorie dans la bdd
 		catManager.ajouterCategorieServ(pCategorie);
 		
-		//recup de la liste des fonctionnaire
+		//recup de la liste des catégories
 		List<Categorie> listeCat= internauteManager.listCategoriesServ();
 		
-		//recup de la lsite des fonctionnaire dans la bdd + renvoi des données vers fonctionnaire.jsp
+		//recup de la liste des catégories dans la bdd + renvoi des données vers catégorie.jsp
 		modele.addAttribute("listeCat", listeCat);
 		
-		//redirection vers fonctionnaires.jsp
+		//redirection vers categories.jsp
 		return "categories";
 	}
 	
 	/**
 	 * affiche le formulaire en reponse a une requete en GET pour la modification.
-	 * @return : URL = http.../fonctionnaire/updatefonctionnaireform?fonctid=1
+	 * @return : URL = http.../categorie/updatecatégorieform?fonctid=1
 	 */
 	@RequestMapping(value="/categories/updatecategorieform" , method=RequestMethod.GET)
 	public ModelAndView setUpFormulaireUpdate(@RequestParam("id") Long pIdCat) {
 		
-		//1.recup du fonctionnaire de la BDD(c'est l'objet de commande)
+		//1.recup de la catégorie de la BDD(c'est l'objet de commande)
 		Categorie categorie = internauteManager.getCategorieServ(pIdCat);
 		
-		//nom de la vue : updatefonctionnaire
-		// nom de l'objet de commade : fonctionnaireUpCommande --> /WEB-IINF/view/updateFonctionnaire.jsp
-		// l'objet de commande : fonctionnaire
+		//nom de la vue : updatecategorie
+		// nom de l'objet de commande : categorieUpCommande --> /WEB-IINF/view/updatecategorie.jsp
+		// l'objet de commande : categorie
 		return new ModelAndView("updatecategorie", "categorieUpCommand", categorie);
 		
 	}
 	
 	/**
-	 * modifier un fonctionnaire dans la bdd
+	 * modifier une categorie dans la bdd
 	 * @param pFonctionnaire
 	 * @param modele
 	 * @return
@@ -132,13 +132,13 @@ public class AdminCategoriesController {
 	@RequestMapping(value="/categories/update", method=RequestMethod.POST)
 	public String updateProduit(@ModelAttribute("categorieUpCommand") Categorie pCategorie, ModelMap modele) {
 	
-		//appel du service pour modifier le fonctionnaire dans la bdd
+		//appel du service pour modifier de la catégorie dans la bdd
 		catManager.modifierCategorieServ(pCategorie);
 		
-		//recup de la liste des fonctionnaire dans la bdd + renvoi des données vers fonctionnaire.jsp
+		//recup de la liste des catégories dans la bdd + renvoi des données vers categorie.jsp
 		modele.addAttribute("listeCat", internauteManager.listCategoriesServ());
 				
-		//redirection vers fonctionnaires.jsp
+		//redirection vers categories.jsp
 		return "categories";
 	}
 	

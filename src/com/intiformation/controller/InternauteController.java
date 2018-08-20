@@ -23,13 +23,13 @@ public class InternauteController {
 
 	//declaration du service
 	@Autowired
-	private InternauteBoutique fonctionnaireManager;
+	private InternauteBoutique internauteManager;
 	
 	/**
-	 * @param fonctionnaireManager the fonctionnaireManager to set
+	 * @param internauteManager the internauteManager to set
 	 */
-	public void setFonctionnaireManager(InternauteBoutique fonctionnaireManager) {
-		this.fonctionnaireManager = fonctionnaireManager;
+	public void setFonctionnaireManager(InternauteBoutique internauteManager) {
+		this.internauteManager = internauteManager;
 	}
 
 	/**
@@ -39,8 +39,8 @@ public class InternauteController {
 	 */
 	@RequestMapping(value="/eboutique/liste", method=RequestMethod.GET)
 	public String listerProduits(ModelMap modele) {
-		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
-		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
+		//appel du service pour récupérer la liste des produits dans la bdd
+		List<Produit> listeProd = internauteManager.listproduitsServ();
 		
 		//données a retourner vers la vue
 		modele.addAttribute("produits", listeProd);
@@ -50,12 +50,11 @@ public class InternauteController {
 		//données a retourner vers la vue
 	    modele.addAttribute("panier", n);
 		
-	    List<Categorie> listeCat =fonctionnaireManager.listCategoriesServ();
+	    List<Categorie> listeCat =internauteManager.listCategoriesServ();
 	    
 	    modele.addAttribute("categories", listeCat);
 	    
 		//renvoie du nom logique de la vue
-		//'fonctionnaires' --> /WEB-INF/views/fonctionnaires.jsp
 		return "eboutique";
 		
 	}
@@ -63,8 +62,8 @@ public class InternauteController {
 	@RequestMapping(value="/eboutique/listeCat", method=RequestMethod.GET)
 	public String listerProduitsCat(@PathVariable("idCat") Long pIdCat,
 			ModelMap modele) {
-		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
-		List<Produit> listeProd = fonctionnaireManager.produitsParCategorieServ(pIdCat);
+		//appel du service pour récupérer la liste des produits dans la bdd
+		List<Produit> listeProd = internauteManager.produitsParCategorieServ(pIdCat);
 		
 		//données a retourner vers la vue
 		modele.addAttribute("produits", listeProd);
@@ -74,12 +73,11 @@ public class InternauteController {
 		//données a retourner vers la vue
 	    modele.addAttribute("panier", n);
 		
-	    List<Categorie> listeCat =fonctionnaireManager.listCategoriesServ();
+	    List<Categorie> listeCat =internauteManager.listCategoriesServ();
 	    
 	    modele.addAttribute("categories", listeCat);
 	    
 		//renvoie du nom logique de la vue
-		//'fonctionnaires' --> /WEB-INF/views/fonctionnaires.jsp
 		return "eboutique";
 		
 	}
@@ -87,8 +85,8 @@ public class InternauteController {
 	@RequestMapping(value="/eboutique/listeMot", method=RequestMethod.GET)
 	public String listerProduitsMotsCles(@PathVariable("idMC") String pIdMC,
 			ModelMap modele) {
-		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
-		List<Produit> listeProd = fonctionnaireManager.produitsParMotCleServ(pIdMC);
+		//appel du service pour récupérer la liste des produits dans la bdd
+		List<Produit> listeProd = internauteManager.produitsParMotCleServ(pIdMC);
 		
 		//données a retourner vers la vue
 		modele.addAttribute("produits", listeProd);
@@ -98,12 +96,11 @@ public class InternauteController {
 		//données a retourner vers la vue
 	    modele.addAttribute("panier", n);
 		
-	    List<Categorie> listeCat =fonctionnaireManager.listCategoriesServ();
+	    List<Categorie> listeCat =internauteManager.listCategoriesServ();
 	    
 	    modele.addAttribute("categories", listeCat);
 		
 		//renvoie du nom logique de la vue
-		//'fonctionnaires' --> /WEB-INF/views/fonctionnaires.jsp
 		return "eboutique";
 	
 	}
@@ -114,13 +111,13 @@ public class InternauteController {
 			@RequestParam("prix") int prix,
 			ModelMap modele) {
 		
-		//appel du service pour récupérer la liste des fonctionnaire dans la bdd
-		List<Produit> listeProd = fonctionnaireManager.listproduitsServ();
+		//appel du service pour récupérer la liste des produits dans la bdd
+		List<Produit> listeProd = internauteManager.listproduitsServ();
 		
 	    //données a retourner vers la vue
 		modele.addAttribute("produits", listeProd);
 				
-		Produit prod= fonctionnaireManager.getProduitServ(pIdProd);
+		Produit prod= internauteManager.getProduitServ(pIdProd);
 				
 		GestionPanier.addProduct(pComm, prod, prix, pQuantite);
 		
@@ -129,12 +126,11 @@ public class InternauteController {
 		//données a retourner vers la vue
 	    modele.addAttribute("panier", n);
 		
-	    List<Categorie> listeCat =fonctionnaireManager.listCategoriesServ();
+	    List<Categorie> listeCat =internauteManager.listCategoriesServ();
 	    
 	    modele.addAttribute("categories", listeCat);
 	    
 		//renvoie du nom logique de la vue
-		//'fonctionnaires' --> /WEB-INF/views/fonctionnaires.jsp
 		return "eboutique";
 	
 	}
